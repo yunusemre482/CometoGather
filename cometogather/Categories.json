@@ -1,0 +1,136 @@
+{ 
+    "Giyim":[
+      "Giyim",
+      "Apparel",
+      "Vêtements",
+      "Ropa"
+    ],
+    "Çanta":[
+      "Çanta",
+      "Bags",
+      "Sacs",
+      "Bolsos"
+    ],
+    "Aksesuar":[
+      "Aksesuar",
+      "Accessories",
+      "Accessoires",
+      "Accesorios"
+    ],
+    "Ayakkabı": [
+      "Ayakkabı",
+      "Shoes",
+      "Chaussures",
+      "Zapatos"
+    ],
+    "Bot": [
+      "Bot",
+      "Boots",
+      "Bottes et Bottines",
+      "Botas"
+    ],
+    "Sandalet ve Terlik": [
+      "Sandalet ve Terlik",
+      "Sandals and Slippers",
+      "Sandales et Pantoufles",
+      "Sandalias y Pantuflas"
+    ],
+    "Düz Ayakkabı": [
+      "Düz Ayakkabı",
+      "Flat Shoes",
+      "Chaussures Plates",
+      "Zapatos Planos"    
+    ]
+    ,
+    "Topuklu": [
+      "Topuklu",
+      "Hells",
+      "à Talon",
+      "Tacones"
+    ],
+    "Üst Giyim": [
+      "Üst Giyim",
+      "Top Wear",
+      "Hauts",
+      "Tops"
+      
+    ],
+    "Alt Giyim": [
+      "Alt Giyim",
+      "Bottom Wear",
+      "Chaussettes Vêtements",
+      "Ropa de Calcetines"
+    ],
+    "Sırt Çantası": [
+      "Sırt Çantası",
+      "Backpacks",
+      "Sacs à Dos",
+      "Mochilas"
+    ],
+    "El Çantası":[
+      "El Çantası",
+      "Handbags",
+      "Sacs à Main",
+      "Bolsos de Mano"
+    ],
+    "Omuz Çantası":[
+      "Omuz Çantası",
+      "Shoulder Bags",
+      "Sacs Bandoulière",
+      "Bolsas de hombro"
+    ],
+    "Seyahat Ürünleri": [
+      "Seyahat Ürünleri",
+      "Travel Products",
+      "Produits de Voyage",
+      "Productos de Viaje"
+    ],
+    "Sneaker":[
+      "Sneaker",
+      "Sneakers",
+      "Baskets",
+      "Zapatillas"
+    ],
+    "Küçük Prens": [
+      "Küçük Prens",
+      "The Little Prince",
+      "Le Petit Prince",
+      "El Principito"
+    ],
+    "Çakmaktaşlar": [
+      "Çakmaktaşlar",
+      "The Flintstones",
+      "Les Pierrafeu",
+      "Los Picapiedras"
+    ],
+    "Lisanslı Ürünler":[ 
+      "Lisanslı Ürünler", 
+      "Licensed Products", 
+      "Sous Licence",
+      "Con Licencia"
+    ],
+    "Markalar": [ 
+      "Markalar",
+      "Brands",
+      "Marques",
+      "Marcas"
+    ],
+    "Çocuk": [ 
+      "Çocuk",
+      "Kids",
+      "Brands",
+      "Enfants","Niños"
+    ],
+    "Kadın": [
+      "Kadın",
+    "Women",
+    "Femmes",
+    "Mujeres"
+    ],
+    "Erkek": [
+      "Erkek",
+      "Men",
+      "Hommes",
+      "Hombres"
+    ]
+  }
