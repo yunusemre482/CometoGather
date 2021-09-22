@@ -1,44 +1,59 @@
 const INITIAL_STATE={
   isLoggedIn:false,
   isLoading:false,
-  userData:{},
-  error:undefined
+  user:{},
+  error:''
 }
+import {
+  SIGN_IN_BEGINS,
+  SIGN_IN_SUCCESS,
+  SIGN_IN_ERROR,
 
-export default function auth(state=INITIAL_STATE,action){
+  SIGN_UP_SUCCESS,
+  SIGN_UP_ERROR,
+
+  SIGN_OUT,
+} from '../actionTypes/authActionTypes'
+
+const authReducer=(state=INITIAL_STATE,action)=>{
   switch (action.type) {
-    case 'LOGIN_ATTEMPT':
-      return{
-        ...state,
-        isLoading:true,
-        isLoggedIn:false
-      }
-      break;
-    case 'LOGIN_SUCCESS':
-      return{
-        ...state,
-        isLoading:false,
-        isLoggedIn:true,
-        userData:action.userData,
-        error:undefined
-      }
-      break;
-    case 'LOGIN_FAILED':
-      return{
-        ...state,
-        isLoading:false,
-        isLoggedIn:false,
-        error:action.error
-      }
-      break;
-    case 'LOGOUT':
-      return{
-        ...state,
-        isLoading:false,
-        isLoggedIn:false
-      }
-      break;
+    case SIGN_IN_BEGINS : return {
+      ...state,
+      isLoading: true,
+    }
+    break;
+
+    case SIGN_IN_SUCCESS: return {
+      ...state,
+      isloading:false,
+      isLoggedIn:true,
+      user:action.payload.user
+    }
+    break;
+    case SIGN_IN_ERROR: return {
+      ...state,
+      isloading:false,
+      isLoggedIn:false,
+      error:action.payload.error
+    }
+    break;
+    case SIGN_UP_SUCCESS: return {
+      ...state,
+      user:action.payload.user,
+      isLoggedIn:true,
+    }
+    case SIGN_UP_ERROR: return {
+      ...state,
+      error:action.payload,
+    }
+    break;
+    case SIGN_OUT: return {
+      ...state,
+      isLoggedIn:false,
+    }
     default:
       return state
   }
 }
+
+export default authReducer;

@@ -1,57 +1,47 @@
-export function isLoading(bool){
-    return{
-      type:'LOGIN_ATTEMPT',
-      isLoading:bool
-    }
-  }
-  
-  export function loginSuccess(userData){
-    return{
-      type:'LOGIN_SUCCESS',
-      userData
-    }
-  }
-  
-  export function loginFailed(error){
-    return{
-      type:'LOGIN_FAILED',
-      error
-    }
-  }
-  
-  export function login(data){
-    return dispatch => {
-      dispatch(isLoading(true));
-      return fetch('http://192.168.0.101:3000/v1/auth/login',{
-        method:'POST',
-        headers:{
-          'Content-Type':'application/json'
-        },
-        body:JSON.stringify({
-          "email":data.email,
-          "password":data.password
-        })
+import * as actions from '../actionTypes/authActionTypes'
+import api from '../../api/'
+export const signUp = user => {
+  return dispatch => {
+    api
+      .post(`/auth/signup`, user)
+      .then(res => {
+        
+        dispatch({
+          type: actions.SIGN_UP_SUCCESS,
+          payload: res.data.json()
+        });
       })
-      .then((response) => {
-        if(response.status < 300){
-          dispatch(isLoading(false))
-          response.json().then((responseJSON) => {
-            console.log("responseJSON",responseJSON);
-            dispatch(loginSuccess(responseJSON))
-          })
-        }
-        else{
-          response.json().then((responseJSON) => {
-            console.log("responseJSON",responseJSON);
-            dispatch(isLoading(false))
-            dispatch(loginFailed(responseJSON.message))
-          })
-        }
+      .catch(error => {
+        console.log(error);
+        dispatch({type: actions.SIGN_UP_ERROR, payload: error})
+      });
+  };
+};
+
+export const signIn = (email, password) => {
+ 
+  return dispatch => {
+    
+    dispatch({type:actions.SIGN_IN_BEGINS})
+    api
+      .post(`/auth/signin`, {email, password})
+      .then(res => {
+        dispatch({
+          type: actions.SIGN_IN_SUCCESS,
+          payload: res.data,
+        });
       })
-      .catch((error) => {
-        console.log("error",error);
-        dispatch(isLoading(false))
-        dispatch(loginFailed(error))
-      })
-    }
-  }
+      .catch(error => {
+        console.log(error);
+        dispatch({type:actions.SIGN_IN_ERROR, payload: error});
+      });
+  };
+};
+
+export const signOut = () => {
+  return dispatch => {
+    dispatch({
+      type:  actions.SIGN_OUT
+    });
+  };
+};

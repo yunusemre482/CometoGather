@@ -9,9 +9,10 @@ import {
 } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
-
+import {useDispatch} from 'react-redux';
 import * as Animatable from 'react-native-animatable';
-
+import { bindActionCreators } from 'redux';
+import {signIn} from '../redux/actions/authAction'
 export default function SignIn({navigation}) {
   const [data, setData] = useState({
     email: '',
@@ -19,7 +20,10 @@ export default function SignIn({navigation}) {
     check_textInputChange: false,
     secureTextEntry: true,
   });
-
+  const dispatch = useDispatch();
+  const handleSubmit = async () => {
+    dispatch(signIn(data.email,data.password));
+  };
   const textInputChange = val => {
     if (val.length != 0) {
       setData({
@@ -98,7 +102,7 @@ export default function SignIn({navigation}) {
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            console.log('pressed');
+            handleSubmit()
           }}>
           <Text style={{color: 'white', fontWeight: '500'}}> Sign in </Text>
         </TouchableOpacity>

@@ -16,12 +16,11 @@ import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import MIcon from 'react-native-vector-icons/MaterialIcons';
-import {AuthContext} from '../../components/context';
+
 
 export function DrawerContent(props) {
   const paperTheme = useTheme();
 
-  const {value} = React.useContext(AuthContext);
   
   return (
     <View style={{flex: 1}}>
@@ -77,6 +76,7 @@ export function DrawerContent(props) {
                 props.navigation.navigate('Profile');
               }}
             />
+            /*
             <DrawerItem
               icon={({color, size}) => (
                 <MIcon name="admin-panel-settings" color={color} size={size} />
@@ -86,6 +86,7 @@ export function DrawerContent(props) {
                 props.navigation.navigate('AdminScreen');
               }}
             />
+            */
             <DrawerItem
               icon={({color, size}) => (
                 <Icon name="cog-outline" color={color} size={size} />
