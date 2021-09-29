@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
 const cors = require("cors");
 
-
+mongoose.set('debug', true);
 const PORT = process.env.PORT || 3000;
 
 const dotenv = require('dotenv'); 
@@ -17,11 +17,13 @@ mongoose.connect(process.env.DB_CONNECT ,{ useNewUrlParser: true  , useUnifiedTo
 });
 
 const authRoutes = require('./routes/authRoutes');
+const clubRoutes = require('./routes/clubRoutes');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/api/auth/" ,authRoutes);
 
+app.use("/api/club/",clubRoutes);
 
 app.listen(PORT, () => {
   console.log(`Example app listening at http://localhost:${PORT}`)

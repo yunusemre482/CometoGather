@@ -18,7 +18,7 @@ import { color, round } from 'react-native-reanimated';
 Feather.loadFont();
 MaterialCommunityIcons.loadFont();
 
-export default function Home ({ navigation }){
+export default function Explore ({ navigation }){
   const popularData = [
     {
       id: '1',
@@ -75,14 +75,14 @@ export default function Home ({ navigation }){
       selected: false,
     }
   ];
-  
   const renderCategoryItem = ({ item }) => {
     return (
-      <View
+      <TouchableOpacity
+        onPress={handleSelectedClub}
         style={[
           styles.categoryItemWrapper,
           {
-            backgroundColor: item.selected ? "coral": colors.white,
+            backgroundColor: item.selected ? "#d02860": colors.white,
             marginLeft: item.id == 1 ? 20 : 0,
           },
         ]}>
@@ -102,15 +102,18 @@ export default function Home ({ navigation }){
             color={item.selected ? colors.black : colors.white}
           />
         </View>
-      </View>
+      </TouchableOpacity>
     );
+  };
+  const handleSelectedClub =(id)=>{
+
   };
 
   return (
     <View style={styles.container}>
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
-        showsVerticalScrollIndicator={false}>
+        showsHorizontalScrollIndicator={false}>
     
         {/* Search */}
         <View style={styles.searchWrapper}>
@@ -122,7 +125,7 @@ export default function Home ({ navigation }){
 
         {/* Categories */}
         <View style={styles.categoriesWrapper}>
-          <Text style={styles.categoriesTitle}>Your Clubs</Text>
+          <Text style={styles.categoriesTitle}>Clubs</Text>
           <View style={styles.categoriesListWrapper}>
             <FlatList
               data={categoriesData}
@@ -135,7 +138,7 @@ export default function Home ({ navigation }){
 
         {/* Popular */}
         <View style={styles.popularWrapper}>
-          <Text style={styles.popularTitle}>Your Sub-Clubs</Text>
+          <Text style={styles.popularTitle}>Popular Sub-Clubs</Text>
           {popularData.map((item) => (
             <TouchableOpacity
               key={item.id}
@@ -172,7 +175,7 @@ export default function Home ({ navigation }){
                   </View>
                   <View style={styles.popularCardBottom}>
                     <View style={styles.joinButton}>
-                      <Text style={{fontSize:12}}>Enter </Text>
+                      <Text style={{fontSize:12,color:'white',fontWeight:"600"}}>Join now!</Text>
                     </View>
                     <View style={styles.ratingWrapper}>
                       <MaterialCommunityIcons
@@ -200,6 +203,7 @@ export default function Home ({ navigation }){
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor:'#fff6'
   },
   headerWrapper: {
     flexDirection: 'row',
@@ -257,6 +261,9 @@ const styles = StyleSheet.create({
   },
   categoryItemWrapper: {
     backgroundColor: '#F5CA48',
+    borderBottomWidth:0.5,
+    borderLeftWidth:0.5,
+    borderTopEndRadius:20,
     marginRight: 20,
     borderRadius: 20,
     shadowColor: colors.black,
@@ -294,11 +301,14 @@ const styles = StyleSheet.create({
   },
   popularWrapper: {
     paddingHorizontal: 20,
+    paddingBottom:5,
   },
   popularTitle: {
     fontSize: 16,
   },
   popularCardWrapper: {
+    borderWidth:0.6,
+    borderColor:"#dddd",
     backgroundColor: colors.white,
     borderRadius: 25,
     paddingTop: 20,
@@ -341,7 +351,7 @@ const styles = StyleSheet.create({
     marginLeft: -20,
   },
   joinButton: {
-    backgroundColor: "coral",
+    backgroundColor: "#d02860",
     paddingHorizontal: 24,
     paddingVertical: 20,
     borderTopRightRadius: 25,

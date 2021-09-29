@@ -11,7 +11,6 @@ import {
   TouchableRipple,
   Switch,
 } from 'react-native-paper';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -21,7 +20,6 @@ import MIcon from 'react-native-vector-icons/MaterialIcons';
 export function DrawerContent(props) {
   const paperTheme = useTheme();
 
-  
   return (
     <View style={{flex: 1}}>
       <DrawerContentScrollView {...props}>
@@ -31,7 +29,7 @@ export function DrawerContent(props) {
               <Avatar.Image
                 source={{
                   uri:
-                    'https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png',
+                    'https://images.unsplash.com/photo-1474978528675-4a50a4508dc3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80',
                 }}
                 size={50}
               />
@@ -76,7 +74,6 @@ export function DrawerContent(props) {
                 props.navigation.navigate('Profile');
               }}
             />
-            /*
             <DrawerItem
               icon={({color, size}) => (
                 <MIcon name="admin-panel-settings" color={color} size={size} />
@@ -86,7 +83,6 @@ export function DrawerContent(props) {
                 props.navigation.navigate('AdminScreen');
               }}
             />
-            */
             <DrawerItem
               icon={({color, size}) => (
                 <Icon name="cog-outline" color={color} size={size} />
@@ -128,7 +124,7 @@ export function DrawerContent(props) {
           )}
           label="Sign Out"
           onPress={() => {
-            value.signOut();
+            signOut();
           }}
         />
       </Drawer.Section>

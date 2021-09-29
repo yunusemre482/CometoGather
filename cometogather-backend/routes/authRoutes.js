@@ -3,6 +3,19 @@ const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const { signInValidation, signUpValidation } = require("../public/validation");
 
+router.get("/users", async (req, res) => {
+  const users = await User.find({});
+
+  const userMap = {};
+  users.forEach((user) => {
+    userMap[user._id] = user;
+  });
+
+  res.send(userMap);
+});
+
+
+
 router.post("/signup", async (req, res) => {
   const { error } = signUpValidation(req.body);
 
@@ -15,7 +28,9 @@ router.post("/signup", async (req, res) => {
   if (emailExist)
     return res.status(400).send({ message: "User already exist" });
   if (usernameExist)
-    return res.status(400).send({ message: "Username already used by someone" });
+    return res
+      .status(400)
+      .send({ message: "Username already used by someone" });
 
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(req.body.password, salt);
