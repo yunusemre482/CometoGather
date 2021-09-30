@@ -1,1 +1,1 @@
-# CometoGAther
+# CometoGather

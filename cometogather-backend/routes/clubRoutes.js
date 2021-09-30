@@ -15,7 +15,6 @@ router.post("/", async function (req, res) {
     date: req.body.date,
   });
 
-
   try {
     const savedClub = await club.save();
     res.send({ club: savedClub });
@@ -24,14 +23,29 @@ router.post("/", async function (req, res) {
   }
 });
 
-router.post("/addUser", function (req, res) {
-  console.log(req.body);
+router.get("/", async function (req, res) {
+  const clubs = await Club.find({});
+  try {
+    const clubsMap = {};
+    clubs.forEach((club) => {
+      clubsMap[club._id] = club;
+    });
 
-  Club.findAndModify({
-    _id:ObjectId("6151bf6916dfa6faff981d2a")
-  },{
-    $push :{ "members": {username: req.body.username,avatar:req.body.avatar} }
-  });
-  return res.status(400).send({ message: req.params.id });
+    res.status(400).send(clubsMap);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
+router.post("/addUser", async (req, res) => {
+  const club = await Club.findOne({ name: req.body.name });
+
+  if (club) {
+    club.members.push({ username: req.body.username, avatar: req.body.avatar });
+    const savedClub = await club.save();
+    return res.status(400).send({ message: savedClub });
+  }
+
+  return res.status(400).send({ message: "club doesn't exist" });
 });
 module.exports = router;
