@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -11,14 +12,20 @@ import {
 } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-
+import {useSelector} from 'react-redux';
 import colors from '../constants/colors';
-import { color, round } from 'react-native-reanimated';
-
+import {color, round} from 'react-native-reanimated';
+import {connect} from 'react-redux';
+import {getAllClubs} from '../redux/actions/clubAction';
 Feather.loadFont();
 MaterialCommunityIcons.loadFont();
 
-export default function Home ({ navigation }){
+const Home = ({getclubs,navigation}) => {
+  const clubs= useSelector((state) => state.club.clubs);
+  useEffect(() => {
+    getclubs();
+  }, []);
+
   const popularData = [
     {
       id: '1',
@@ -73,16 +80,16 @@ export default function Home ({ navigation }){
       image: require('../assets/images/Illustration/Science.png'),
       title: 'Science',
       selected: false,
-    }
+    },
   ];
-  
-  const renderCategoryItem = ({ item }) => {
+
+  const renderCategoryItem = ({item}) => {
     return (
       <View
         style={[
           styles.categoryItemWrapper,
           {
-            backgroundColor: item.selected ? "coral": colors.white,
+            backgroundColor: item.selected ? 'coral' : colors.white,
             marginLeft: item.id == 1 ? 20 : 0,
           },
         ]}>
@@ -111,7 +118,7 @@ export default function Home ({ navigation }){
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         showsVerticalScrollIndicator={false}>
-    
+        
         {/* Search */}
         <View style={styles.searchWrapper}>
           <Feather name="search" size={16} color={colors.textDark} />
@@ -119,7 +126,7 @@ export default function Home ({ navigation }){
             <Text style={styles.searchText}>Search</Text>
           </View>
         </View>
-
+        {clubs.map(item => (console.log(item)))}
         {/* Categories */}
         <View style={styles.categoriesWrapper}>
           <Text style={styles.categoriesTitle}>Your Clubs</Text>
@@ -127,7 +134,7 @@ export default function Home ({ navigation }){
             <FlatList
               data={categoriesData}
               renderItem={renderCategoryItem}
-              keyExtractor={(item) => item.id}
+              keyExtractor={item => item.id}
               horizontal={true}
             />
           </View>
@@ -136,12 +143,12 @@ export default function Home ({ navigation }){
         {/* Popular */}
         <View style={styles.popularWrapper}>
           <Text style={styles.popularTitle}>Your Sub-Clubs</Text>
-          {popularData.map((item) => (
+          {clubs.map(item => (
             <TouchableOpacity
-              key={item.id}
+              key={item._id}
               onPress={() =>
-                navigation.navigate('Details', {
-                  item: item,
+                navigation.navigate('ClubDetailScreen', {
+                  club: item,
                 })
               }>
               <View
@@ -163,16 +170,16 @@ export default function Home ({ navigation }){
                     </View>
                     <View style={styles.popularTitlesWrapper}>
                       <Text style={styles.popularTitlesTitle}>
-                        {item.title}
+                        {item.name}
                       </Text>
                       <Text style={styles.popularTitlesWeight}>
-                        Members {item.memberCount}
+                        Members {item.members.length}
                       </Text>
                     </View>
                   </View>
                   <View style={styles.popularCardBottom}>
                     <View style={styles.joinButton}>
-                      <Text style={{fontSize:12}}>Enter </Text>
+                      <Text style={{fontSize: 12}}>Enter </Text>
                     </View>
                     <View style={styles.ratingWrapper}>
                       <MaterialCommunityIcons
@@ -180,13 +187,13 @@ export default function Home ({ navigation }){
                         size={10}
                         color={colors.textDark}
                       />
-                      <Text style={styles.rating}>{item.rating}</Text>
+                      <Text style={styles.rating}>{item.star}</Text>
                     </View>
                   </View>
                 </View>
 
                 <View style={styles.popularCardRight}>
-                  <Image source={item.image} style={styles.popularCardImage} />
+                  <Image source={popularData[0].image} style={styles.popularCardImage} />
                 </View>
               </View>
             </TouchableOpacity>
@@ -196,6 +203,15 @@ export default function Home ({ navigation }){
     </View>
   );
 };
+const mapStateToProps = state => {
+  return {
+    clubs: state.club.clubs,
+  };
+};
+const mapDispatchToProps = (dispatch) => ({
+  getclubs: () => { dispatch(getAllClubs());},
+})
+export default connect(mapStateToProps,mapDispatchToProps)(Home);
 
 const styles = StyleSheet.create({
   container: {
@@ -218,7 +234,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   titlesSubtitle: {
-  
     fontSize: 16,
     color: colors.textDark,
   },
@@ -264,7 +279,7 @@ const styles = StyleSheet.create({
       width: 0,
       height: 2,
     },
-    shadowOpacity: 0.,
+    shadowOpacity: 0,
     shadowRadius: 10,
     elevation: 2,
   },
@@ -341,7 +356,7 @@ const styles = StyleSheet.create({
     marginLeft: -20,
   },
   joinButton: {
-    backgroundColor: "coral",
+    backgroundColor: 'coral',
     paddingHorizontal: 24,
     paddingVertical: 20,
     borderTopRightRadius: 25,

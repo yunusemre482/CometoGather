@@ -23,7 +23,7 @@ import ChatScreen from './screens/Chat/Chat';
 const Drawer = createDrawerNavigator();
 const Routes = props => {
   const [isDarkTheme, setIsDarkTheme] = React.useState(false);
-
+  
   const CustomDefaultTheme = {
     ...NavigationDefaultTheme,
     ...PaperDefaultTheme,

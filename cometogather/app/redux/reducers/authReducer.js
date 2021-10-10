@@ -1,3 +1,5 @@
+
+import AsyncStorage from '@react-native-community/async-storage';
 const INITIAL_STATE={
   isLoggedIn:false,
   isLoading:false,
@@ -23,7 +25,9 @@ const authReducer=(state=INITIAL_STATE,action)=>{
     }
     break;
 
-    case SIGN_IN_SUCCESS: return {
+    case SIGN_IN_SUCCESS: 
+    AsyncStorage.setItem('token', action.token); //save the token
+    return {
       ...state,
       isloading:false,
       isLoggedIn:true,
@@ -47,7 +51,9 @@ const authReducer=(state=INITIAL_STATE,action)=>{
       error:action.payload,
     }
     break;
-    case SIGN_OUT: return {
+    case SIGN_OUT: 
+      AsyncStorage.removeItem('token'); //clear token on device
+    return {
       ...state,
       isLoggedIn:false,
     }

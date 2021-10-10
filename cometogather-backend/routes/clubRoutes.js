@@ -26,14 +26,14 @@ router.post("/", async function (req, res) {
 router.get("/", async function (req, res) {
   const clubs = await Club.find({});
   try {
-    const clubsMap = {};
+    const clubsMap = [];
     clubs.forEach((club) => {
-      clubsMap[club._id] = club;
+      clubsMap.push(club);
     });
 
-    res.status(400).send(clubsMap);
+    return res.send({message:"clubs got",clubs:clubsMap});
   } catch (error) {
-    res.status(400).send(error);
+    res.status(200).send(error);
   }
 });
 

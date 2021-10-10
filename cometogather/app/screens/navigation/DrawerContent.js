@@ -15,11 +15,12 @@ import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import MIcon from 'react-native-vector-icons/MaterialIcons';
-
+import {signOut} from '../../redux/actions/authAction'
+import { useDispatch } from 'react-redux';
 
 export function DrawerContent(props) {
   const paperTheme = useTheme();
-
+  const dispatch=useDispatch();
   return (
     <View style={{flex: 1}}>
       <DrawerContentScrollView {...props}>
@@ -124,7 +125,7 @@ export function DrawerContent(props) {
           )}
           label="Sign Out"
           onPress={() => {
-            signOut();
+            dispatch(signOut());
           }}
         />
       </Drawer.Section>

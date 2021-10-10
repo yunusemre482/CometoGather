@@ -1,0 +1,14 @@
+export const GET_ALL_CLUB = 'GET_ALL_CLUB';
+export const GET_ONE_CLUB = 'GET_ONE_CLUB';
+
+export const DEL_CLUB = 'DEL_CLUB';
+export const ADD_NEW_CLUB = 'ADD_NEW_CLUB';
+
+export const ADD_USER_TO_CLUB = 'ADD_USER_TO_CLUB';
+export const DEL_USER_FROM_CLUB = 'DEL_USER_FROM_CLUB';
+
+export const GET_ALL_CLUB_ERROR = 'GET_ALL_CLUB_ERROR';
+export const GET_ONE_CLUB_ERROR = 'GET_ONE_CLUB_ERROR';
+export const ADD_NEW_CLUB_ERROR = 'ADD_NEW_CLUB_ERROR';
+export const DEL_CLUB_ERROR = 'DEL_CLUB_ERROR';
+export const ADD_USER_TO_CLUB_ERROR = 'ADD_USER_TO_CLUB_ERROR';

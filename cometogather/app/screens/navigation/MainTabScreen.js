@@ -9,6 +9,7 @@ import HomeScreen from '../HomeScreen';
 import DetailsScreen from '../Details';
 import ExploreScreen from '../Explore';
 import ProfileScreen from '../Profile';
+import ClubDetail from '../ClubDetail';
 
 const HomeStack = createStackNavigator();
 const DetailsStack = createStackNavigator();
@@ -89,6 +90,13 @@ const HomeStackScreen = ({navigation}) => (
             backgroundColor="coral"
             onPress={() => navigation.openDrawer()}></Icon.Button>
         ),
+      }}
+    />
+     <HomeStack.Screen
+      name="ClubDetailScreen"
+      component={ClubDetail}
+      options={{
+        headerShown: false,
       }}
     />
     <HomeStack.Screen
