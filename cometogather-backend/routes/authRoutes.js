@@ -14,8 +14,6 @@ router.get("/users", async (req, res) => {
   res.send(userMap);
 });
 
-
-
 router.post("/signup", async (req, res) => {
   const { error } = signUpValidation(req.body);
 
@@ -39,7 +37,7 @@ router.post("/signup", async (req, res) => {
 
   try {
     const savedUser = await user.save();
-    res.send({ user: savedUser });
+    res.send({ message: "user saved successfully", user: savedUser });
   } catch (err) {
     res.status(400).send({ message: err });
   }
@@ -59,7 +57,7 @@ router.post("/signin", async (req, res) => {
   const validPass = await bcrypt.compare(req.body.password, user.password);
   if (!validPass) return res.status(400).send({ message: "Invalid password" });
 
-  res.send({ message: true, user: user });
+  res.send({ message: "user signed in successfully",user: user });
 });
 
 module.exports = router;

@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
-Schema = mongoose.Schema
-
+Schema = mongoose.Schema;
+const imageSchema = require('./Image').schema;
 const clubSchema = mongoose.Schema({
   name: {
     type: String,
@@ -23,16 +23,24 @@ const clubSchema = mongoose.Schema({
   },
   members: [
     {
-      username: String,
-      avatar: String,
+      id: {
+        type: String,
+        unique: true,
+      },
     },
   ],
-  Image: {
-    type: String, //This Schema should be mentioned as a string
-  },
+  subclubs: [
+    {
+      id: {
+        type: String,
+        unique: true,
+      },
+    },
+  ],
+  Image: [imageSchema],
   date: {
     type: Date,
     default: Date.now,
   },
 });
-module.exports = mongoose.model('Club', clubSchema);
+module.exports = mongoose.model("Club", clubSchema);

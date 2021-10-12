@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+const imageSchema =require('./Image').schema;
 const userSchema = new mongoose.Schema({
   firstname: {
     type: String,
@@ -42,14 +42,15 @@ const userSchema = new mongoose.Schema({
   },
   userType: {
     type: String,
-    required: [true, "usertype is required"],
     trim: true,
     lowercase: true,
+    default: "user",
     enum: {
       values: ["user", "admin"],
       message: "each user can only be admin or user",
     },
   },
+  image:[imageSchema],
   password: {
     type: String,
     required: [true, "please enter a password for your account"],
@@ -81,5 +82,6 @@ const userSchema = new mongoose.Schema({
     type: Date,
   },
 });
+
 
 module.exports = mongoose.model("User", userSchema);

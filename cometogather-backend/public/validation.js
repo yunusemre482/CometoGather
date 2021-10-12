@@ -4,11 +4,11 @@ const signUpValidation = (user) => {
   const schema = Joi.object({
     firstname: Joi.string().min(5).max(30).required(),
 
-    lastname: Joi.string().min(5).max(30).required(),
-    username: Joi.string().min(5).alphanum().max(50).required(),
+    lastname: Joi.string().min(2).max(30).required(),
+    username: Joi.string().min(3).alphanum().max(50).required(),
     phoneNumber:Joi.string().min(11).max(11),
     email: Joi.string().email().min(5).max(50).required(),
-    userType: Joi.string().required(),
+    userType: Joi.string(),
     gender: Joi.string().required(),
     password: Joi.string().min(3).max(15).required(),
     birthDate:Joi.date()

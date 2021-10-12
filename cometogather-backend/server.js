@@ -27,6 +27,7 @@ const subclubRoutes = require("./routes/subClubRoutes");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+
 app.use("/api/auth/", authRoutes);
 app.use("/api/club/", clubRoutes);
 app.use("/api/subclub/", subclubRoutes);
